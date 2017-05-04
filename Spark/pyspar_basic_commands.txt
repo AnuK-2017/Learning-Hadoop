@@ -1,0 +1,10 @@
+pyspark  --opens spark in pyhton
+# by default spark is opened in YARN mode
+pyspark --master local  --to open spark in local mode
+
+# to run in SQLcontext
+from pyspark.sql import SQLContext
+
+# to run in Hive context
+from pyspark.sql import HiveContext
+SQLC = HiveContext(sc)

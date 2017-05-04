@@ -1,0 +1,18 @@
+# Importing data from hive tables into spark
+
+#SparkSQL gets shipped with its own metastore (derby), so that it can work even if hive is not installed on the #system.This is the default mode. 
+
+#SparkSQL doesn't have metadata of hive table.To use the hive metastore and access hive tables, we have to add #hive-site.xml in spark conf folder.
+
+#Create a soft link for hive-site.xml in spark/conf directory
+ by using below command:
+
+#sudo ln -s /etc/hive/conf/hive-site.xml /etc/spark/conf/hvie-site.xml
+
+pyspark
+
+>>> from pyspark.sql import HiveContext
+>>> sqlContext = HiveContext(sc)
+>>> dept = sqlContext.sql("select * from departments")
+>>> for rec in dept.collect():
+        print(rec)

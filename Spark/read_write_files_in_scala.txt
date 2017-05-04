@@ -1,0 +1,16 @@
+//using scala in spark
+//reading text files, sequence files from HDFS using RDD
+//use import org.apache.hadoop.io._ to include NullWritable key for sequence files
+
+spark-shell     ----- to enter into spark using scala
+
+import org.apache.hadoop.io._
+
+val dataRDD = sc.textFile("/user/cloudera/sqoop_import/departments")
+
+dataRDD.foreach(println)
+
+dataRDD.map(rec => (NullWritable.get(),rec)).saveAsSequenceFile("/user/cloudera/spark_test/departmentsSeq")
+
+dataRDD.map(x => (x.split(",")(0),x.split(",")(1))).saveAsSequenceFile("/user/cloudera/spark_test/departmentsSeq")
+// hdfs dfs -cat /user/cloudera/spark_test/departmentsSeq/part*
